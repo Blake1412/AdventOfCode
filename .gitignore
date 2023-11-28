@@ -1,2 +1,3 @@
 Python/pyproject.toml
 .idea
+**/input.txt
