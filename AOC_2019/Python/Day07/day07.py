@@ -1,4 +1,4 @@
-from Python.__2019.intcode_computer import IntcodeComputer
+from AOC_2019.Python.intcode_computer import IntcodeComputer
 from itertools import permutations
 
 with open("input.txt") as file:

@@ -1,4 +1,4 @@
-from Python.__2019.intcode_computer import IntcodeComputer
+from AOC_2019.Python.intcode_computer import IntcodeComputer
 
 with open("input.txt") as file:
     data = [int(x) for x in file.read().split(",")]
