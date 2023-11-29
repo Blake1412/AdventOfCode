@@ -6,20 +6,20 @@ with open("input.txt") as file:
 
 def part1():
     intcode_computer = IntcodeComputer(data)
-    intcode_computer.data[1] = 12
-    intcode_computer.data[2] = 2
+    intcode_computer.registers[1] = 12
+    intcode_computer.registers[2] = 2
     intcode_computer.run()
-    return intcode_computer.data[0]
+    return intcode_computer.registers[0]
 
 
 def part2():
     for i in range(100):
         for j in range(100):
             intcode_computer = IntcodeComputer(data)
-            intcode_computer.data[1] = i
-            intcode_computer.data[2] = j
+            intcode_computer.registers[1] = i
+            intcode_computer.registers[2] = j
             intcode_computer.run()
-            if intcode_computer.data[0] == 19690720:
+            if intcode_computer.registers[0] == 19690720:
                 return 100 * i + j
 
 
