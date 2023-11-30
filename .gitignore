@@ -1,4 +1,5 @@
-AOC_2019/Python/pyproject.toml
+pyproject.toml
 .idea
 **/input.txt
+**/data.txt
 **__pycache__

@@ -1,3 +1,4 @@
+import sys
 from collections import deque, defaultdict
 
 
@@ -44,7 +45,7 @@ class IntcodeComputer:
                             store_reg = self.__get_param_reg(instruction % 1000 // 100, 1)
                             match opcode:
                                 case 3:
-                                    self.registers[store_reg] = self.__input_data.popleft()
+                                    self.registers[store_reg] = self.__input_data.popleft() if self.__input_data else ''.join(str(ord(c)) for c in sys.stdin.readline())
                                 case 4:
                                     self.__reg_pointer += 2
                                     self.output = self.registers[store_reg]
