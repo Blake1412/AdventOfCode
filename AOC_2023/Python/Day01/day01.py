@@ -1,4 +1,4 @@
-import time
+from Utils.utils import timer
 
 with open("data.txt") as file:
     data = file.read().split("\n")
@@ -9,70 +9,46 @@ numbers = {"one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six"
 def part1():
     total = 0
     for row in data:
-        string = ""
-        temp = ""
-        seen = False
-        for ch in row:
-            if ch.isdigit():
-                temp = ch
-                if not seen:
-                    string += temp
-                    seen = True
-        string += temp
-        total += int(string)
+        total += int("".join(get_numerics_from_string(row)))
     return total
 
 
 def part2():
     total = 0
     for row in data:
-        string = ""
-        temp_string = ""
-        temp_char = ""
-        seen = False
-        for ch in row:
-            if ch.isdigit():
-                temp_char = ch
-                temp_string = ""
-                if not seen:
-                    string += ch
-                    seen = True
-            else:
-                temp_string += ch
-                if not seen:
-                    value = get_numeric_from_string(temp_string)
-                    if value is not None:
-                        string += value
-                        seen = True
-                        temp_string = ""
-
-        string += value if (value := get_numeric_from_string(temp_string, True)) else temp_char
-        total += int(string)
+        total += int("".join(get_numerics_from_string(row, include_strings=True)))
     return total
 
 
-def get_numeric_from_string(string: str, last=False):
-    if last:
-        for i in range(len(string), 0, -1):
-            for j in range(i - 1, -1, -1):
-                substring = string[j:i]
-                if substring in numbers:
-                    return numbers[substring]
-    else:
-        for i in range(len(string)):
+def get_numerics_from_string(string: str, include_strings=False):
+    first_last = [None, None]
+    i = 0
+
+    while not first_last[0]:
+        if string[i].isdigit():
+            first_last[0] = string[i]
+        elif include_strings:
             for j in range(i + 1, len(string) + 1):
-                substring = string[i:j]
-                if substring in numbers:
-                    return numbers[substring]
-    return None
+                if string[j - 1].isdigit():
+                    break
+                if string[i:j] in numbers:
+                    first_last[0] = numbers[string[i:j]]
+        i += 1
+
+    i = len(string)
+    while not first_last[1]:
+        if string[i - 1].isdigit():
+            first_last[1] = string[i - 1]
+        elif include_strings:
+            for j in range(i - 1, -1, -1):
+                if string[j].isdigit():
+                    break
+                if string[j:i] in numbers:
+                    first_last[1] = numbers[string[j:i]]
+        i -= 1
+
+    return first_last
 
 
 if __name__ == '__main__':
-    now = time.time_ns()
-    print("Part 1")
-    print(f"Answer: {part1()}")
-    print(f"Time: {(time.time_ns() - now) // 1e+9}s")
-    now = time.time_ns()
-    print("Part 2")
-    print(f"Answer: {part2()}")
-    print(f"Time: {(time.time_ns() - now) // 1e+9}s")
+    timer(part1, part2)
