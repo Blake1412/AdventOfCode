@@ -3,3 +3,4 @@ pyproject.toml
 **/input.txt
 **/data.txt
 **__pycache__
+Utils/go.mod
