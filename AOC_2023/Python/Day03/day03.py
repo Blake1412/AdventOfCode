@@ -1,6 +1,8 @@
+import sys
+
 from Utils.utils import timer
 
-with open("data.txt") as file:
+with open(sys.argv[1]) as file:
     data = file.read().split("\n")
 
 neighbours = [[1, 1], [1, 0], [1, -1], [0, 1], [0, -1], [-1, 1], [-1, 0], [-1, -1]]

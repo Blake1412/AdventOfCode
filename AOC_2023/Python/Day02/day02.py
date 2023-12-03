@@ -1,6 +1,8 @@
+import sys
+
 from Utils.utils import timer
 
-with open("data.txt") as file:
+with open(sys.argv[1]) as file:
     data = [row.split(" ") for row in file.read().split("\n")]
 
 
