@@ -3,3 +3,6 @@
 **/data.txt
 **__pycache__
 Utils/go.mod
+CMakeLists.txt
+cmake-build-debug
+.venv
