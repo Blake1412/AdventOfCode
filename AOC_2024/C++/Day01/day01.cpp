@@ -10,14 +10,14 @@
 
 using namespace std;
 
-vector<vector<int> > data = {{}, {}};
+vector<vector<int> > input_data = {{}, {}};
 
 long long part1()
 {
     long long sum = 0;
-    for (int i = 0; i < data[0].size(); i++)
+    for (int i = 0; i < input_data[0].size(); i++)
     {
-        sum += abs(data[0][i] - data[1][i]);
+        sum += abs(input_data[0][i] - input_data[1][i]);
     }
     return sum;
 }
@@ -26,11 +26,11 @@ long long part2()
 {
     long long sum = 0;
     unordered_map<int, int> frequencies;
-    for (int i: data[0])
+    for (int i: input_data[0])
     {
         frequencies[i]++;
     }
-    for (int i: data[1])
+    for (int i: input_data[1])
     {
         sum += i * frequencies[i];
     }
@@ -47,12 +47,12 @@ int main()
         stringstream ss(line);
         int left, right;
         ss >> left >> right;
-        data[0].push_back(left);
-        data[1].push_back(right);
+        input_data[0].push_back(left);
+        input_data[1].push_back(right);
     }
     f.close();
-    sort(data[0].begin(), data[0].end());
-    sort(data[1].begin(), data[1].end());
+    sort(input_data[0].begin(), input_data[0].end());
+    sort(input_data[1].begin(), input_data[1].end());
 
     utils::timer(part1, part2);
 }
